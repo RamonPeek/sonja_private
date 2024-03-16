@@ -16,7 +16,7 @@ export default {
       for (const category of this.categories) {
         for (const part of category.parts) {
           part.answers = part.answers.sort((a, b) => (a.order > b.order) ? 1 : -1)
-          if (!part.answerValue) {
+          if (!part.answerValues) {
             return {
               category: this.categoryWithoutQuestions(category),
               question: part
@@ -34,11 +34,12 @@ export default {
       return copy;
     },
     storeAnswer(data) {
+      console.log(data);
       var targetCategory = this.categories.find(x => x.id == data.categoryId);
       if(targetCategory) {
         var targetQuestion = targetCategory.parts.find(x => x.id == data.questionId);
         if(targetQuestion) {
-          targetQuestion.answerValue = data.answerValue;
+          targetQuestion.answerValues = data.answerValues;
           console.log(targetQuestion);
         }
       }
