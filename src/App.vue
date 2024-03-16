@@ -1,25 +1,27 @@
 <template>
-  <MooiChart msg="Welcome to Your Vue.js App"/>
+  <v-app>
+    <v-main>
+      <v-container>
+        <v-row class="d-flex justify-center">
+          <v-col cols="12" xs="12" sm="12" md="12" lg="12" xl="9" xxl="8" col class="bg-red">
+            test
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-main>
+  </v-app>
 </template>
 
 <script>
-import MooiChart from './components/MooiChart.vue'
 
 export default {
   name: 'App',
+
   components: {
-    MooiChart
-  }
+  },
+
+  data: () => ({
+    //
+  }),
 }
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>./components/Chart.vue
