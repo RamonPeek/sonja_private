@@ -1,27 +1,51 @@
 <template>
-  <div>
-    {{ storingAnswer }}
-    {{ givenAnswers }}
-    <div class="d-flex justify-center">
-      <v-col cols="12" xs="12" sm="12" md="12" lg="12" xl="9" xxl="8">
-        <v-card class="pa-3 elevation-0 rounded-pill" :style="{backgroundColor: rgbToHex(category.color)}">
-          <v-card class="bg-white pa-3 elevation-0 rounded-pill">
-            <v-card class="pa-12 elevation-0 rounded-pill" :style="{backgroundColor: rgbToHex(category.color)}">
-              <div class="ma-12">
-                <h1 class="text-white pb-3">{{ currentQuestion.title }}</h1>
-                <p class="text-white pb-3">{{ currentQuestion.question }}</p>
-                <v-checkbox hide-details="auto" v-for="(answer, index) in currentQuestion.answers" :key="index"
-                  v-model="givenAnswers" class="text-white"
-                  :value="answer" :label="answer.text"
-                ></v-checkbox>
-                <v-btn @click="answer" :disabled="storingAnswer || !givenAnswers?.length">Answer</v-btn>
-              </div>
+  <v-container>
+    <v-row class="d-flex justify-center">
+      <v-col cols="9" xxl="7" class="pe-10">
+        <div>
+          <v-card class="pa-3 elevation-0 rounded-xxl mt-16" :style="{backgroundColor: rgbToHex(category.color), transform: 'rotate(-3deg)'}">
+            <v-card class="bg-white pa-3 elevation-0 rounded-xxl">
+              <v-card class="pa-12 elevation-0 rounded-xxl" :style="{backgroundColor: rgbToHex(category.color)}">
+                <div class="ma-12" :style="{ transform: 'rotate(3deg)'}">
+                  <h1 class="text-white pb-3">{{ currentQuestion.title }}</h1>
+                  <p class="text-white pb-8 question-text">{{ currentQuestion.question }}</p>
+                  <v-checkbox hide-details="auto" v-for="(answer, index) in currentQuestion.answers" :key="index"
+                    v-model="givenAnswers" class="text-white answer-label-text pt-1"
+                    :value="answer"
+                  >
+                    <template v-slot:label>
+                      <span class="answer-label-text ps-6 pb-1">{{ answer.text }}</span>
+                    </template>
+                  </v-checkbox>
+                  <div class="d-flex justify-end">
+                    <v-col cols="2">
+                      <v-btn @click="answer" :disabled="storingAnswer || !givenAnswers?.length" class="mt-10" rounded="xl" size="x-large" block>Volgende</v-btn>
+                    </v-col>
+                  </div>
+                </div>
+              </v-card>
             </v-card>
           </v-card>
-        </v-card>
+      </div>
       </v-col>
-    </div>
-  </div>
+      <v-col cols="3">
+        <img :src="require('@/assets/logo.jpeg')" style="max-width: 100%">
+        <div class="mt-4">
+          <b style="font-size: 2rem" class="ps-4">
+            {{ category.title }}
+          </b>
+          <div class="pt-2">
+            <div :style="{'border-left': '2px solid ' + rgbToHex(category.color)}">
+              <p class="ps-4" style="font-size: 1.6rem" :style="{color: rgbToHex(category.color), fontWeight: subCategory.id == currentQuestion.id ? 'bold' : '400'}"
+              v-for="subCategory in category.parts" :key="subCategory.id">
+                {{ subCategory.title }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
@@ -66,3 +90,22 @@ export default {
   }
 }
 </script>
+<style scoped>
+
+.rounded-xxl {
+  border-radius:180px;
+}
+
+h1 {
+  font-size: 5rem;
+}
+
+.question-text {
+  font-size: 2.5rem;
+}
+
+.answer-label-text {
+  font-size: 2rem;
+}
+
+</style>

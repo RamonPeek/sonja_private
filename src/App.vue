@@ -5,3 +5,10 @@
   </nav>
   <router-view/>
 </template>
+<style>
+
+body {
+  font-family: "Barlow Condensed", sans-serif;
+}
+
+</style>

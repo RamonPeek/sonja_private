@@ -18,7 +18,7 @@ export default {
           part.answers = part.answers.sort((a, b) => (a.order > b.order) ? 1 : -1)
           if (!part.answerValues) {
             return {
-              category: this.categoryWithoutQuestions(category),
+              category: category,
               question: part
             };
           }
@@ -28,11 +28,6 @@ export default {
     }
   },
   methods: {
-    categoryWithoutQuestions(category) {
-      var copy = JSON.parse(JSON.stringify(category));
-      delete copy.parts;
-      return copy;
-    },
     storeAnswer(data) {
       console.log(data);
       var targetCategory = this.categories.find(x => x.id == data.categoryId);
