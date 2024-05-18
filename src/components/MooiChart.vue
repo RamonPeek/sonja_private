@@ -3,6 +3,7 @@
     <Chart :data="chartData" :options="chartOptions" :key="updateKey"></Chart>
   </div>
   
+  
 </template>
 
 <script>
